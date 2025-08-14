@@ -14,6 +14,7 @@ import Certificates from "./pages/Certificates";
 import Contact from "./pages/Contact";
 import ContentManager from "./pages/ContentManager";
 import NotFound from "./pages/NotFound";
+import UnderConstruction from "./pages/UnderConstruction";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,11 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
+          {/* Temporarily using UnderConstruction as the main page */}
+          <Route path="/" element={<UnderConstruction />} />
+          
+          {/* Original routes - commented out during construction phase */}
+          {/* 
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/infrastructure" element={<Infrastructure />} />
@@ -44,8 +50,10 @@ const App = () => (
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/content-manager" element={<ContentManager />} />
+          */}
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<UnderConstruction />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
