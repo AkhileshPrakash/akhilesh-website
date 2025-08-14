@@ -5,13 +5,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Loader2, Sparkles, Copy, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
 
-interface PerplexityContentGeneratorProps {
+interface ContentGeneratorProps {
   onContentGenerated?: (content: string) => void;
 }
 
-const PerplexityContentGenerator = ({ onContentGenerated }: PerplexityContentGeneratorProps) => {
+const ContentGenerator = ({ onContentGenerated }: ContentGeneratorProps) => {
   const [prompt, setPrompt] = useState('');
   const [contentType, setContentType] = useState('general');
   const [generatedContent, setGeneratedContent] = useState('');
@@ -31,30 +30,37 @@ const PerplexityContentGenerator = ({ onContentGenerated }: PerplexityContentGen
 
     setIsLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke('perplexity-content', {
-        body: {
-          message: prompt,
-          type: contentType
-        }
-      });
-
-      if (error) throw error;
-
-      if (data.success) {
-        setGeneratedContent(data.content);
-        onContentGenerated?.(data.content);
-        toast({
-          title: "Content Generated",
-          description: "Successfully generated content using Perplexity AI",
-        });
-      } else {
-        throw new Error(data.error || 'Failed to generate content');
+      // Simulate content generation with sample responses based on content type
+      let generatedText = '';
+      
+      // Add a small delay to simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      switch(contentType) {
+        case 'product-description':
+          generatedText = `Our premium ${prompt} are crafted with the finest materials, ensuring exceptional quality and comfort. Designed for durability and style, these products meet international standards and are perfect for export markets. Each item undergoes rigorous quality control to guarantee customer satisfaction.`;
+          break;
+        case 'buyer-content':
+          generatedText = `The market for ${prompt} continues to grow globally, with significant interest from European and North American buyers. Recent trends show increased demand for sustainable and ethically produced textiles, creating new opportunities for manufacturers who prioritize environmental responsibility.`;
+          break;
+        case 'company-updates':
+          generatedText = `We're excited to announce our recent developments regarding ${prompt}. This strategic initiative aligns with our company's commitment to innovation and quality excellence. Our team has worked diligently to ensure that this update meets the highest industry standards.`;
+          break;
+        default:
+          generatedText = `${prompt} represents an important aspect of the textile industry. With our expertise and dedication to quality, we continue to provide exceptional products and services to our clients worldwide. Our commitment to excellence drives everything we do.`;
       }
+      
+      setGeneratedContent(generatedText);
+      onContentGenerated?.(generatedText);
+      toast({
+        title: "Content Generated",
+        description: "Successfully generated sample content",
+      });
     } catch (error) {
       console.error('Error generating content:', error);
       toast({
         title: "Error",
-        description: "Failed to generate content. Please check your Perplexity API key configuration.",
+        description: "Failed to generate content.",
         variant: "destructive",
       });
     } finally {
@@ -82,7 +88,7 @@ const PerplexityContentGenerator = ({ onContentGenerated }: PerplexityContentGen
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-primary" />
-            Perplexity AI Content Generator
+            Content Generator
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -163,4 +169,4 @@ const PerplexityContentGenerator = ({ onContentGenerated }: PerplexityContentGen
   );
 };
 
-export default PerplexityContentGenerator;
+export default ContentGenerator;

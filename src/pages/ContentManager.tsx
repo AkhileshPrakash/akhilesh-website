@@ -1,5 +1,5 @@
 import Layout from '@/components/Layout';
-import PerplexityContentGenerator from '@/components/PerplexityContentGenerator';
+import ContentGenerator from '@/components/ContentGenerator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FileText, Image, Users, Building } from 'lucide-react';
@@ -12,7 +12,7 @@ const ContentManager = () => {
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-primary mb-4">Content Manager</h1>
             <p className="text-muted-foreground text-lg">
-              Use Perplexity AI to generate and update content for your website
+              Generate and update content for your website
             </p>
           </div>
 
@@ -42,7 +42,7 @@ const ContentManager = () => {
                   <CardTitle>General Content Generation</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <PerplexityContentGenerator />
+                  <ContentGenerator />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -61,7 +61,7 @@ const ContentManager = () => {
                       <li>• "Generate product specs for organic cotton hoodies for European buyers"</li>
                     </ul>
                   </div>
-                  <PerplexityContentGenerator />
+                  <ContentGenerator />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -80,7 +80,7 @@ const ContentManager = () => {
                       <li>• "Generate information about fast fashion retailers in Asia"</li>
                     </ul>
                   </div>
-                  <PerplexityContentGenerator />
+                  <ContentGenerator />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -99,7 +99,7 @@ const ContentManager = () => {
                       <li>• "Generate a press release about expanding to new international markets"</li>
                     </ul>
                   </div>
-                  <PerplexityContentGenerator />
+                  <ContentGenerator />
                 </CardContent>
               </Card>
             </TabsContent>
